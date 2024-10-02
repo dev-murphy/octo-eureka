@@ -7,7 +7,6 @@
 - **Task Management**: Stay on top of your tasks and track progress effortlessly.
 - **Productivity Boost**: A beautifully crafted app that motivates you to act and finish tasks.
 - **Seamless UI**: Modern design powered by cutting-edge front-end technologies.
-- **Real-time Sync**: Powered by Supabase for instant updates across devices.
 
 ## 💻 Tech Stack
 
