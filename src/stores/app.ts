@@ -8,6 +8,12 @@ export const useAppStore = defineStore("app", {
   }),
   actions: {
     addTodo() {
+      const found = this.todos.find(
+        (todo) => todo.title.toLowerCase() === this.todoInput.toLowerCase()
+      );
+
+      if (this.todoInput === "" || found) return;
+
       this.todos.push({
         id: this.todos.length + 1,
         title: this.todoInput,
