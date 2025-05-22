@@ -17,11 +17,11 @@ const appStore = useAppStore();
       <li
         v-for="(todo, index) in appStore.todos"
         :key="index"
-        class="hover:bg-neutral-800/50 text-white flex items-center p-3"
+        class="w-full hover:bg-neutral-800/50 text-white flex items-center p-3 overflow-hidden"
       >
-        <Checkbox v-model="appStore.todos[index].completed" />
+        <Checkbox v-model="todo.completed" :priority="todo.priority" />
         <p
-          class="pl-2"
+          class="pl-2 pr-5 truncate overflow-hidden"
           :class="{
             'line-through text-neutral-600': todo.completed,
           }"

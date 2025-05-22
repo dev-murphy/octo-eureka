@@ -1,8 +1,8 @@
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
+    width="32"
+    height="32"
     viewBox="0 0 24 24"
   >
     <!-- Icon from Tabler Icons by Paweł Kuna - https://github.com/tabler/tabler-icons/blob/master/LICENSE -->
@@ -11,8 +11,8 @@
       stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
-      stroke-width="3"
-      d="m5 12l5 5L20 7"
-    ></path>
+      stroke-width="2"
+      d="M4 4h16v2.172a2 2 0 0 1-.586 1.414L15 12v7l-6 2v-8.5L4.52 7.572A2 2 0 0 1 4 6.227z"
+    />
   </svg>
 </template>

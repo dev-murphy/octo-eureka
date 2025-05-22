@@ -10,8 +10,8 @@ const appStore = useAppStore();
       Welcome to {{ appStore.name }}
     </h1>
     <div class="w-full max-w-[650px] flex flex-col gap-4 mt-4 mx-auto">
-      <Input />
-      <List />
+      <TodoInput />
+      <TodoList />
     </div>
   </div>
 </template>
