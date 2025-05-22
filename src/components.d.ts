@@ -9,9 +9,15 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Alert: typeof import('./components/Alert.vue')['default']
+    Check: typeof import('./components/icons/Check.vue')['default']
+    Checkbox: typeof import('./components/todo/Checkbox.vue')['default']
     Copy: typeof import('./components/Copy.vue')['default']
     Github: typeof import('./components/Github.vue')['default']
+    Input: typeof import('./components/todo/Input.vue')['default']
+    List: typeof import('./components/todo/List.vue')['default']
+    Plus: typeof import('./components/icons/Plus.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Trash: typeof import('./components/icons/Trash.vue')['default']
   }
 }
