@@ -5,7 +5,11 @@ export const useAppStore = defineStore("app", {
   state: () => ({
     name: "Octo Eureka",
     todos: [] as Todo[],
+    todoIndex: -1,
     todoInput: "",
+    mode: {
+      isEditMode: false,
+    },
     menus: {
       currentMenu: "",
       filter: {
@@ -49,6 +53,7 @@ export const useAppStore = defineStore("app", {
         id: this.todos.length + 1,
         title: this.todoInput,
         completed: false,
+        description: "",
         priority: this.menus.priority.current,
       });
 
@@ -57,6 +62,14 @@ export const useAppStore = defineStore("app", {
     },
     removeTodo(index: number) {
       this.todos.splice(index, 1);
+    },
+    editTodo(index: number, newTodo: Partial<Todo>) {
+      if (index < 0 || index >= this.todos.length) return;
+
+      this.todos[index] = {
+        ...this.todos[index],
+        ...newTodo,
+      };
     },
     // Menu
     toggleMenu(menu: "filter" | "sort" | "priority") {

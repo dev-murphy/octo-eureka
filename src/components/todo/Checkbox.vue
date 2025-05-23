@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { PRIORITY } from "@/types";
 
-defineProps<{
+const { label = "" } = defineProps<{
+  id: string;
   modelValue: boolean;
   priority: PRIORITY;
+  label?: string;
 }>();
 
 defineEmits<{
@@ -14,6 +16,8 @@ defineEmits<{
 <template>
   <div class="relative">
     <input
+      :id="id"
+      :name="id"
       type="checkbox"
       :checked="modelValue"
       @change="
@@ -22,7 +26,7 @@ defineEmits<{
       class="opacity-0 absolute inset-0 cursor-pointer z-10"
     />
     <div
-      class="w-5 h-5 flex items-center justify-center border-2 rounded-md"
+      class="flex items-center gap-x-1.5"
       :class="{
         'border-red-500 text-red-500': priority === 'high',
         'border-yellow-500 text-yellow-500': priority === 'medium',
@@ -30,7 +34,10 @@ defineEmits<{
         'border-white text-white': priority === '',
       }"
     >
-      <Check v-if="modelValue" class="w-4 h-4" />
+      <div class="w-5 h-5 flex items-center justify-center border-2 rounded-md">
+        <Check v-if="modelValue" class="w-4 h-4" />
+      </div>
+      <label v-if="label" :for="id">{{ label }}</label>
     </div>
   </div>
 </template>

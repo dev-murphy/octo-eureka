@@ -13,5 +13,7 @@ const appStore = useAppStore();
       <TodoInput />
       <TodoList />
     </div>
+
+    <EditModal v-if="appStore.mode.isEditMode" />
   </div>
 </template>

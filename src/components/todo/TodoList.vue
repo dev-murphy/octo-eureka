@@ -1,5 +1,10 @@
 <script setup lang="ts">
 const appStore = useAppStore();
+
+const editTodo = (index: number) => {
+  appStore.todoIndex = index;
+  appStore.mode.isEditMode = true;
+};
 </script>
 
 <template>
@@ -16,10 +21,14 @@ const appStore = useAppStore();
     <ul v-else class="divide-y divide-neutral-700">
       <li
         v-for="(todo, index) in appStore.todos"
-        :key="index"
+        :key="`todo-item-${index}`"
         class="w-full hover:bg-neutral-800/50 text-white flex items-center p-3 overflow-hidden"
       >
-        <Checkbox v-model="todo.completed" :priority="todo.priority" />
+        <Checkbox
+          :id="`todo-${index}-is-complete`"
+          v-model="todo.completed"
+          :priority="todo.priority"
+        />
         <p
           class="pl-2 pr-5 truncate overflow-hidden"
           :class="{
@@ -28,12 +37,25 @@ const appStore = useAppStore();
         >
           {{ todo.title }}
         </p>
-        <button
-          @click="appStore.removeTodo(index)"
-          class="hover:bg-neutral-800 hover:text-red-500 ml-auto p-1.5 rounded-md cursor-pointer"
-        >
-          <Trash class="w-5 h-5" />
-        </button>
+
+        <!-- Button Group: Delete & Edit -->
+        <div class="flex gap-x-0.5 ml-auto">
+          <!-- Edit Button -->
+          <button
+            @click="editTodo(index)"
+            class="hover:bg-neutral-800 hover:text-blue-500 p-1.5 rounded-md cursor-pointer"
+          >
+            <Edit class="w-5 h-5" />
+          </button>
+
+          <!-- Delete Button -->
+          <button
+            @click="appStore.removeTodo(index)"
+            class="hover:bg-neutral-800 hover:text-red-500 p-1.5 rounded-md cursor-pointer"
+          >
+            <Trash class="w-5 h-5" />
+          </button>
+        </div>
       </li>
     </ul>
   </div>

@@ -18,7 +18,7 @@ export default defineConfig({
     }),
     AutoImport({
       include: [/\.vue$/, /\.vue\?vue/],
-      imports: ["vue", VueRouterAutoImports],
+      imports: ["vue", "@vueuse/core", VueRouterAutoImports],
       dts: "src/auto-imports.d.ts",
       dirs: ["src/stores"],
     }),

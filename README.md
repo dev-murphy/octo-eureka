@@ -11,7 +11,7 @@ TDB
 
 ## What Am I Working?
 
-- [ ] Add sidebar for editing items
+- [x] Add sidebar for editing items
 - [ ] Add subtask functionality
 - [ ] Add due date functions
 - [ ] Add dark mode/color mode
