@@ -34,7 +34,7 @@ onMounted(() => {
 <template>
   <div
     v-if="todoCopy"
-    class="fixed w-screen h-screen bg-black/40 backdrop-blur-sm"
+    class="fixed w-full inset-y-0 bg-black/40 backdrop-blur-sm"
   >
     <div
       ref="target"
@@ -144,9 +144,11 @@ onMounted(() => {
                   ? 'bg-white text-neutral-900'
                   : 'hover:bg-neutral-800 text-white',
               ]"
-              @click="() => {
-                todoCopy.priority = ''
-              }"
+              @click="
+                () => {
+                  todoCopy.priority = '';
+                }
+              "
             >
               <FlagCross class="w-5 h-5" />
             </button>
