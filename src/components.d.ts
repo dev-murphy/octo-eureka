@@ -25,6 +25,7 @@ declare module 'vue' {
     Input: typeof import('./components/todo/Input.vue')['default']
     List: typeof import('./components/icons/List.vue')['default']
     Modal: typeof import('./components/common/modal.vue')['default']
+    Notes: typeof import('./components/icons/Notes.vue')['default']
     Plus: typeof import('./components/icons/Plus.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

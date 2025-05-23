@@ -5,11 +5,15 @@ const { options = [] } = defineProps<{
   id: string;
   options?: DropdownOption[];
 }>();
+
+const target = useTemplateRef<HTMLElement>("target");
 const appStore = useAppStore();
+
+onClickOutside(target, () => (appStore.menus.currentMenu = ""));
 </script>
 
 <template>
-  <div class="relative w-full">
+  <div ref="target" class="relative w-full">
     <!-- Trigger -->
     <slot />
 

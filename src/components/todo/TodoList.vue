@@ -29,14 +29,30 @@ const editTodo = (index: number) => {
           v-model="todo.completed"
           :priority="todo.priority"
         />
-        <p
-          class="pl-2 pr-5 truncate overflow-hidden"
-          :class="{
-            'line-through text-neutral-600': todo.completed,
-          }"
-        >
-          {{ todo.title }}
-        </p>
+
+        <!-- Title, description and subtask -->
+        <div class="pl-2 pr-5">
+          <p
+            class="truncate overflow-hidden"
+            :class="{
+              'line-through text-neutral-600': todo.completed,
+            }"
+          >
+            {{ todo.title }}
+          </p>
+
+          <!-- Description -->
+          <div
+            v-if="todo.description"
+            class="flex items-center gap-x-1 text-neutral-400"
+          >
+            <Notes class="w-4 h-4" />
+            <span
+              class="w-full max-w-[30ch] text-sm truncate overflow-hidden"
+              >{{ todo.description }}</span
+            >
+          </div>
+        </div>
 
         <!-- Button Group: Delete & Edit -->
         <div class="flex gap-x-0.5 ml-auto">
