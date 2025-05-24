@@ -56,6 +56,7 @@ watch(height, () => {
         v-for="(todo, index) in appStore.todos"
         :key="`todo-item-${index}`"
         class="w-full hover:bg-neutral-800/50 text-white flex items-center p-3 overflow-hidden"
+        @click="editTodo(index)"
       >
         <Checkbox
           :id="`todo-${index}-is-complete`"
@@ -87,19 +88,11 @@ watch(height, () => {
           </div>
         </div>
 
-        <!-- Button Group: Delete & Edit -->
+        <!-- Button Group: Delete -->
         <div class="flex gap-x-0.5 ml-auto">
-          <!-- Edit Button -->
-          <button
-            @click="editTodo(index)"
-            class="hover:bg-neutral-800 hover:text-blue-500 p-1.5 rounded-md cursor-pointer"
-          >
-            <Edit class="w-5 h-5" />
-          </button>
-
           <!-- Delete Button -->
           <button
-            @click="appStore.removeTodo(index)"
+            @click.stop="appStore.removeTodo(index)"
             class="hover:bg-neutral-800 hover:text-red-500 p-1.5 rounded-md cursor-pointer"
           >
             <Trash class="w-5 h-5" />
