@@ -11,7 +11,7 @@ const appStore = useAppStore();
     </h1>
     <div class="w-full max-w-[650px] flex flex-col gap-4 mt-4 mx-auto">
       <TodoInput />
-      <TodoList />
+      <TodoList :todos="appStore.todos" />
     </div>
 
     <EditModal v-if="appStore.mode.isEditMode" />

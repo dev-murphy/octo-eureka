@@ -5,7 +5,7 @@ const { textarea, input } = useTextareaAutosize();
 const target = useTemplateRef<HTMLElement>("target");
 
 const todoCopy = ref(
-  structuredClone(toRaw(appStore.todos[appStore.todoIndex]))
+  JSON.parse(JSON.stringify(toRaw(appStore.todos[appStore.todoIndex])))
 );
 
 const updateTodo = () => {
@@ -87,6 +87,7 @@ onMounted(() => {
           />
         </div>
 
+        <!-- Priority Toggle -->
         <div>
           <p class="text-neutral-400">Priority</p>
           <div
@@ -170,6 +171,13 @@ onMounted(() => {
         class="w-full bg-neutral-800 border border-neutral-700 p-2 pb-2.5 placeholder:text-neutral-500 text-white outline-none resize-none rounded-md"
         placeholder="Enter task description"
       />
+
+      <p class="mb-0.5 text-neutral-400 font-medium tracking-wider">
+        Sub-tasks
+      </p>
+
+      <TodoInput :is-sub-task="true" class="mb-3" />
+      <TodoList :todos="appStore.todos[appStore.todoIndex].subtasks" />
     </div>
   </div>
 </template>

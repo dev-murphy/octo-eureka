@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { BaseTodo, Todo } from "@/types";
+
+defineProps<{ todos: Todo[] | BaseTodo[] }>();
+
 const appStore = useAppStore();
 
 const container = useTemplateRef<HTMLElement>("container-element");
@@ -42,8 +46,9 @@ watch(height, () => {
     class="todo-container relative h-[500px] bg-black border border-neutral-600 rounded-lg overflow-y-auto"
     @scroll="handleScroll"
   >
+    <span class="text-white"> </span>
     <p
-      v-if="appStore.todos.length === 0"
+      v-if="todos.length === 0"
       class="w-4/5 pt-3 text-lg text-neutral-400 text-center mx-auto"
     >
       There is no todo items currently. You can add todo by typing the title and
@@ -53,7 +58,7 @@ watch(height, () => {
     <!-- Todo List -->
     <ul v-else ref="list-element" class="divide-y divide-neutral-700">
       <li
-        v-for="(todo, index) in appStore.todos"
+        v-for="(todo, index) in todos"
         :key="`todo-item-${index}`"
         class="w-full hover:bg-neutral-800/50 text-white flex items-center p-3 overflow-hidden"
         @click="editTodo(index)"
@@ -61,7 +66,7 @@ watch(height, () => {
         <Checkbox
           :id="`todo-${index}-is-complete`"
           v-model="todo.completed"
-          :priority="todo.priority"
+          :priority="'priority' in todo ? todo.priority : ''"
         />
 
         <!-- Title, description and subtask -->
@@ -75,16 +80,30 @@ watch(height, () => {
             {{ todo.title }}
           </p>
 
-          <!-- Description -->
-          <div
-            v-if="todo.description"
-            class="flex items-center gap-x-1 text-neutral-400"
-          >
-            <Notes class="w-4 h-4" />
-            <span
-              class="w-full max-w-[30ch] text-sm truncate overflow-hidden"
-              >{{ todo.description }}</span
+          <div class="flex flex-col sm:flex-row text-neutral-400">
+            <!-- Subtasks  -->
+            <div
+              v-if="'subtasks' in todo && todo.subtasks.length > 0"
+              class="flex items-center pr-1"
             >
+              <Subtask class="w-5 h-4" />
+              <span class="text-sm"
+                >{{ todo.subtasks.length }}
+                {{ todo.subtasks.length === 1 ? "task" : "tasks" }}</span
+              >
+            </div>
+
+            <!-- Description -->
+            <div
+              v-if="'description' in todo && todo.description"
+              class="flex items-center gap-x-1 pl-1"
+            >
+              <Notes class="w-4 h-4" />
+              <span
+                class="w-full max-w-[30ch] text-sm truncate overflow-hidden"
+                >{{ todo.description }}</span
+              >
+            </div>
           </div>
         </div>
 
@@ -92,7 +111,11 @@ watch(height, () => {
         <div class="flex gap-x-0.5 ml-auto">
           <!-- Delete Button -->
           <button
-            @click.stop="appStore.removeTodo(index)"
+            @click.stop="
+              'description' in todo
+                ? appStore.removeTodo(index)
+                : appStore.removeSubtask(index)
+            "
             class="hover:bg-neutral-800 hover:text-red-500 p-1.5 rounded-md cursor-pointer"
           >
             <Trash class="w-5 h-5" />
@@ -102,6 +125,7 @@ watch(height, () => {
     </ul>
 
     <div
+      v-if="height > 455"
       :class="[
         canScroll
           ? 'sticky bottom-0 w-full h-8 bg-linear-to-t from-black to-transparent flex items-end justify-center pb-2 text-white'

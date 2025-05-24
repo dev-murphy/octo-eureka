@@ -32,6 +32,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     Save: typeof import('./components/icons/Save.vue')['default']
     Sort: typeof import('./components/icons/Sort.vue')['default']
+    Subtask: typeof import('./components/icons/Subtask.vue')['default']
     TodoInput: typeof import('./components/todo/TodoInput.vue')['default']
     TodoList: typeof import('./components/todo/TodoList.vue')['default']
     Trash: typeof import('./components/icons/Trash.vue')['default']

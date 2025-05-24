@@ -51,8 +51,5 @@ const appStore = useAppStore();
         <span class="block md:hidden">Priority</span>
       </button>
     </Modal>
-    <!-- <button class="hover:bg-neutral-700 p-2">
-      <List class="w-6 h-6" />
-    </button> -->
   </div>
 </template>

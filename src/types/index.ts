@@ -1,11 +1,15 @@
 export type PRIORITY = "high" | "medium" | "low" | "";
 
-export interface Todo {
+export interface BaseTodo {
   id: number;
   title: string;
-  description: string;
   completed: boolean;
+}
+
+export interface Todo extends BaseTodo {
+  description: string;
   priority: PRIORITY;
+  subtasks: BaseTodo[];
 }
 
 export interface DropdownOption {

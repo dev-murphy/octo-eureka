@@ -6,7 +6,6 @@ export const useAppStore = defineStore("app", {
     name: "Octo Eureka",
     todos: [] as Todo[],
     todoIndex: -1,
-    todoInput: "",
     mode: {
       isEditMode: false,
     },
@@ -42,22 +41,17 @@ export const useAppStore = defineStore("app", {
     },
   }),
   actions: {
-    addTodo() {
-      const found = this.todos.find(
-        (todo) => todo.title.toLowerCase() === this.todoInput.toLowerCase()
-      );
-
-      if (this.todoInput === "" || found) return;
-
+    // Main Task
+    addTodo(title: string) {
       this.todos.push({
         id: this.todos.length + 1,
-        title: this.todoInput,
+        title,
         completed: false,
         description: "",
+        subtasks: [],
         priority: this.menus.priority.current,
       });
 
-      this.todoInput = "";
       this.menus.priority.current = "";
     },
     removeTodo(index: number) {
@@ -70,6 +64,17 @@ export const useAppStore = defineStore("app", {
         ...this.todos[index],
         ...newTodo,
       };
+    },
+    // Subtasks
+    addSubtask(title: string) {
+      this.todos[this.todoIndex].subtasks.push({
+        id: this.todos[this.todoIndex].subtasks.length + 1,
+        title,
+        completed: false,
+      });
+    },
+    removeSubtask(index: number) {
+      this.todos[this.todoIndex].subtasks.splice(index, 1);
     },
     // Menu
     toggleMenu(menu: "filter" | "sort" | "priority") {

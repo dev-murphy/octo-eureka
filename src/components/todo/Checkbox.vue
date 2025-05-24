@@ -14,7 +14,7 @@ defineEmits<{
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative" @click.stop>
     <input
       :id="id"
       :name="id"
