@@ -5,7 +5,7 @@ TDB
 ## What Have I Done?
 
 - [x] Add basic features for MVP todo app
-  - ADD & DELELE todo
+  - ADD, EDIT & DELELE todo
 - [x] Create a modal for dropdown menu
 - [x] Create priority dropdown and add priority to todo item
 - [x] Add sidebar for editing items
