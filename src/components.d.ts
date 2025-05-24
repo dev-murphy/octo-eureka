@@ -11,6 +11,7 @@ declare module 'vue' {
     Alert: typeof import('./components/Alert.vue')['default']
     Check: typeof import('./components/icons/Check.vue')['default']
     Checkbox: typeof import('./components/todo/Checkbox.vue')['default']
+    Chevron: typeof import('./components/icons/Chevron.vue')['default']
     Close: typeof import('./components/icons/Close.vue')['default']
     Copy: typeof import('./components/Copy.vue')['default']
     Edit: typeof import('./components/icons/Edit.vue')['default']
