@@ -28,10 +28,10 @@ defineEmits<{
     <div
       class="flex items-center gap-x-1.5"
       :class="{
-        'border-red-500 text-red-500': priority === 'high',
-        'border-yellow-500 text-yellow-500': priority === 'medium',
-        'border-blue-500 text-blue-500': priority === 'low',
-        'border-white text-white': priority === '',
+        'border-priority-high text-priority-high': priority === 'high',
+        'border-priority-medium text-priority-medium': priority === 'medium',
+        'border-priority-low text-priority-low': priority === 'low',
+        'border-txt-500 text-txt-500': priority === '',
       }"
     >
       <div class="w-5 h-5 flex items-center justify-center border-2 rounded-md">

@@ -2,6 +2,7 @@
 const { isSubTask = false } = defineProps<{
   isSubTask?: boolean;
 }>();
+
 const appStore = useAppStore();
 
 const title = ref("");
@@ -10,11 +11,11 @@ const todoExists = computed(() => {
   let found;
   if (!isSubTask) {
     found = appStore.todos.find(
-      (todo) => todo.title.toLowerCase() === title.value.toLowerCase()
+      (todo) => todo.title.toLowerCase() === title.value.toLowerCase().trim()
     );
   } else {
     found = appStore.todos[appStore.todoIndex].subtasks.find(
-      (todo) => todo.title.toLowerCase() === title.value.toLowerCase()
+      (todo) => todo.title.toLowerCase() === title.value.toLowerCase().trim()
     );
   }
 
@@ -37,18 +38,18 @@ const addItem = () => {
           type="text"
           placeholder="Enter todo here"
           v-model="title"
-          class="bg-neutral-800/50 flex-grow border border-neutral-700 rounded-md p-2 text-white placeholder:text-neutral-500 outline-none"
+          class="bg-primary flex-grow border border-secondary rounded-md p-2 text-txt-500 placeholder:text-txt-100 outline-none"
           @keydown.enter="addItem"
         />
         <button
-          class="p-2 rounded-md"
+          class="bg-primary disabled:bg-bkg-100 p-2 text-txt-500 disabled:text-txt-100 rounded-md"
           :class="[
-            todoExists || title === ''
-              ? 'bg-neutral-900 text-neutral-500 cursor-not-allowed'
-              : 'bg-neutral-800 hover:bg-neutral-700 text-white cursor-pointer',
+            todoExists || title.trim() === ''
+              ? 'cursor-not-allowed'
+              : 'hover:bg-secondary cursor-pointer',
           ]"
           @click="addItem"
-          :disabled="todoExists || title === ''"
+          :disabled="todoExists || title.trim() === ''"
         >
           <Plus class="w-6 h-6" />
         </button>
@@ -56,7 +57,7 @@ const addItem = () => {
 
       <FilterOptions v-if="!isSubTask" />
     </div>
-    <p v-if="todoExists" class="pt-1 text-sm text-red-400 tracking-wide">
+    <p v-if="todoExists" class="pt-1 text-sm text-priority-high tracking-wide">
       A todo with this title already exist. Please type another title.
     </p>
   </div>

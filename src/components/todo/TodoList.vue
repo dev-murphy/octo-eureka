@@ -43,24 +43,23 @@ watch(height, () => {
 <template>
   <div
     ref="container-element"
-    class="todo-container relative h-[500px] bg-black border border-neutral-600 rounded-lg overflow-y-auto"
+    class="todo-container relative h-[500px] bg-bkg-100 border-2 border-bkg-100 rounded-lg overflow-y-auto"
     @scroll="handleScroll"
   >
-    <span class="text-white"> </span>
     <p
       v-if="todos.length === 0"
-      class="w-4/5 pt-3 text-lg text-neutral-400 text-center mx-auto"
+      class="w-4/5 pt-3 text-lg text-txt-100 text-center mx-auto"
     >
       There is no todo items currently. You can add todo by typing the title and
       click the add button.
     </p>
 
     <!-- Todo List -->
-    <ul v-else ref="list-element" class="divide-y divide-neutral-700">
+    <ul v-else ref="list-element" class="divide-y divide-primary">
       <li
         v-for="(todo, index) in todos"
         :key="`todo-item-${index}`"
-        class="w-full hover:bg-neutral-800/50 text-white flex items-center p-3 overflow-hidden"
+        class="w-full hover:bg-primary text-txt-500 flex items-center p-3 overflow-hidden"
         @click="editTodo(index)"
       >
         <Checkbox
@@ -74,17 +73,20 @@ watch(height, () => {
           <p
             class="truncate overflow-hidden"
             :class="{
-              'line-through text-neutral-600': todo.completed,
+              'line-through text-secondary': todo.completed,
             }"
           >
             {{ todo.title }}
           </p>
 
-          <div class="flex flex-col sm:flex-row text-neutral-400">
+          <div class="flex flex-col sm:flex-row text-txt-100">
             <!-- Subtasks  -->
             <div
               v-if="'subtasks' in todo && todo.subtasks.length > 0"
               class="flex items-center pr-1"
+              :class="{
+                'pr-1': 'description' in todo && todo.description !== '',
+              }"
             >
               <Subtask class="w-5 h-4" />
               <span class="text-sm"
@@ -96,9 +98,12 @@ watch(height, () => {
             <!-- Description -->
             <div
               v-if="'description' in todo && todo.description"
-              class="flex items-center gap-x-1 pl-1"
+              class="flex items-center gap-x-1"
+              :class="{
+                'pl-1': 'subtasks' in todo && todo.subtasks.length !== 0,
+              }"
             >
-              <Notes class="w-4 h-4" />
+              <Notes class="w-5 h-5" />
               <span
                 class="w-full max-w-[30ch] text-sm truncate overflow-hidden"
                 >{{ todo.description }}</span
@@ -116,7 +121,7 @@ watch(height, () => {
                 ? appStore.removeTodo(index)
                 : appStore.removeSubtask(index)
             "
-            class="hover:bg-neutral-800 hover:text-red-500 p-1.5 rounded-md cursor-pointer"
+            class="hover:bg-bkg-100 hover:text-priority-high p-1.5 rounded-md cursor-pointer"
           >
             <Trash class="w-5 h-5" />
           </button>
@@ -128,7 +133,7 @@ watch(height, () => {
       v-if="height > 455"
       :class="[
         canScroll
-          ? 'sticky bottom-0 w-full h-8 bg-linear-to-t from-black to-transparent flex items-end justify-center pb-2 text-white'
+          ? 'sticky bottom-0 w-full h-8 bg-linear-to-t from-bkg-500 to-transparent flex items-end justify-center pb-2 text-txt-500'
           : '',
       ]"
     >

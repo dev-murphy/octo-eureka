@@ -34,19 +34,19 @@ onMounted(() => {
 <template>
   <div
     v-if="todoCopy"
-    class="fixed w-full inset-y-0 bg-black/40 backdrop-blur-sm"
+    class="fixed w-full inset-y-0 bg-bkg-500/40 backdrop-blur-sm"
   >
     <div
       ref="target"
-      class="absolute right-0 inset-y-0 w-full sm:w-1/2 xl:w-1/3 bg-neutral-900 p-3"
+      class="absolute right-0 inset-y-0 w-full sm:w-1/2 xl:w-1/3 bg-primary p-3"
     >
       <div class="flex justify-between mb-5">
         <!-- Close Button -->
         <button
           @click="closeModal"
-          class="h-8 bg-neutral-700 hover:bg-red-700 flex items-center gap-x-1 px-2 text-neutral-200 cursor-pointer rounded-md"
+          class="h-8 bg-primary flex items-center gap-x-1 px-2 text-txt-100 hover:text-priority-high cursor-pointer rounded-md"
         >
-          <Close class="w-5 h-5" />
+          <Close class="w-6 h-6" />
           Close
         </button>
 
@@ -56,15 +56,15 @@ onMounted(() => {
             id="edit-todo-is-complete"
             v-model:model-value="todoCopy.completed"
             :priority="todoCopy.priority"
-            label="Mark as Done"
+            label="Done"
           />
 
           <!-- Save Button -->
           <button
             @click="updateTodo"
-            class="h-8 bg-neutral-700 hover:bg-neutral-600 flex items-center gap-x-1 px-2 text-neutral-200 cursor-pointer rounded-md"
+            class="h-8 bg-primary flex items-center gap-x-1 px-2 text-txt-100 hover:text-txt-500 cursor-pointer rounded-md"
           >
-            <Save class="w-5 h-5" />
+            <Save class="w-6 h-6" />
             <span class="font-medium">Save</span>
           </button>
         </div>
@@ -75,7 +75,7 @@ onMounted(() => {
           <!-- Input for Editing Title -->
           <label
             for="edit-todo-title"
-            class="mb-0.5 text-neutral-400 font-medium tracking-wider"
+            class="text-txt-100 font-medium tracking-wider"
             >Title</label
           >
           <input
@@ -83,22 +83,22 @@ onMounted(() => {
             type="text"
             v-model="todoCopy.title"
             placeholder="Enter todo title..."
-            class="w-full bg-neutral-800 border border-neutral-700 mb-2 p-2 pb-2.5 placeholder:text-neutral-500 text-white outline-none rounded-md"
+            class="w-full bg-primary border border-secondary mb-2 mt-1 p-2 pb-2.5 placeholder:text-txt-100 text-txt-500 outline-none rounded-md"
           />
         </div>
 
         <!-- Priority Toggle -->
         <div>
-          <p class="text-neutral-400">Priority</p>
+          <p class="text-txt-100">Priority</p>
           <div
-            class="h-11 bg-neutral-700 flex divide-x-2 divide-neutral-900 rounded-md overflow-hidden"
+            class="h-11 bg-secondary flex divide-x-2 divide-primary mt-1 rounded-md overflow-hidden"
           >
             <button
-              class="flex items-center gap-x-1 px-3"
+              class="flex items-center gap-x-1 px-3 cursor-pointer"
               :class="[
                 todoCopy.priority === 'high'
-                  ? 'bg-red-500 text-neutral-900'
-                  : 'hover:bg-neutral-800 text-red-500',
+                  ? 'bg-priority-high text-bkg-100'
+                  : 'hover:bg-bkg-100 text-priority-high',
               ]"
               @click="
                 () => {
@@ -106,14 +106,14 @@ onMounted(() => {
                 }
               "
             >
-              <Flag class="w-5 h-5" />
+              <Flag class="w-6 h-6" />
             </button>
             <button
-              class="flex items-center gap-x-1 px-3"
+              class="flex items-center gap-x-1 px-3 cursor-pointer"
               :class="[
                 todoCopy.priority === 'medium'
-                  ? 'bg-yellow-500 text-neutral-900'
-                  : 'hover:bg-neutral-800 text-yellow-500',
+                  ? 'bg-priority-medium text-bkg-100'
+                  : 'hover:bg-bkg-100 text-priority-medium',
               ]"
               @click="
                 () => {
@@ -121,14 +121,14 @@ onMounted(() => {
                 }
               "
             >
-              <Flag class="w-5 h-5" />
+              <Flag class="w-6 h-6" />
             </button>
             <button
-              class="flex items-center gap-x-1 px-3"
+              class="flex items-center gap-x-1 px-3 cursor-pointer"
               :class="[
                 todoCopy.priority === 'low'
-                  ? 'bg-blue-500 text-neutral-900'
-                  : 'hover:bg-neutral-800 text-blue-500',
+                  ? 'bg-priority-low text-bkg-100'
+                  : 'hover:bg-bkg-100 text-priority-low',
               ]"
               @click="
                 () => {
@@ -136,14 +136,14 @@ onMounted(() => {
                 }
               "
             >
-              <Flag class="w-5 h-5" />
+              <Flag class="w-6 h-6" />
             </button>
             <button
-              class="flex items-center gap-x-1 px-3"
+              class="flex items-center gap-x-1 px-3 cursor-pointer"
               :class="[
                 todoCopy.priority === ''
-                  ? 'bg-white text-neutral-900'
-                  : 'hover:bg-neutral-800 text-white',
+                  ? 'bg-txt-500 text-bkg-100'
+                  : 'hover:bg-bkg-100 text-txt-500',
               ]"
               @click="
                 () => {
@@ -151,7 +151,7 @@ onMounted(() => {
                 }
               "
             >
-              <FlagCross class="w-5 h-5" />
+              <FlagCross class="w-6 h-6" />
             </button>
           </div>
         </div>
@@ -160,7 +160,7 @@ onMounted(() => {
       <!-- Description -->
       <label
         for="edit-todo-description"
-        class="mb-0.5 text-neutral-400 font-medium tracking-wider"
+        class="text-txt-100 font-medium tracking-wider"
         >Description</label
       >
 
@@ -168,13 +168,11 @@ onMounted(() => {
         ref="textarea"
         name="edit-todo-description"
         v-model="input"
-        class="w-full bg-neutral-800 border border-neutral-700 p-2 pb-2.5 placeholder:text-neutral-500 text-white outline-none resize-none rounded-md"
+        class="w-full bg-primary border border-secondary mt-1 p-2 pb-2.5 placeholder:text-txt-100 text-txt-500 outline-none resize-none rounded-md"
         placeholder="Enter task description"
       />
 
-      <p class="mb-0.5 text-neutral-400 font-medium tracking-wider">
-        Sub-tasks
-      </p>
+      <p class="mb-0.5 text-txt-100 font-medium tracking-wider">Sub-tasks</p>
 
       <TodoInput :is-sub-task="true" class="mb-3" />
       <TodoList :todos="appStore.todos[appStore.todoIndex].subtasks" />
