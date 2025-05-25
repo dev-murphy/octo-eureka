@@ -34,7 +34,7 @@ onMounted(() => {
 <template>
   <div
     v-if="todoCopy"
-    class="fixed w-full inset-y-0 bg-bkg-500/40 backdrop-blur-sm"
+    class="fixed w-full inset-y-0 bg-bkg-500/40 backdrop-blur-sm z-10"
   >
     <div
       ref="target"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { BaseTodo, Todo } from "@/types";
+import { getRelativeDate } from "@/utils";
 
 defineProps<{ todos: Todo[] | BaseTodo[] }>();
 
@@ -43,7 +44,7 @@ watch(height, () => {
 <template>
   <div
     ref="container-element"
-    class="todo-container relative h-[500px] bg-bkg-100 border-2 border-bkg-100 rounded-lg overflow-y-auto"
+    class="todo-container h-[500px] bg-bkg-100 border-2 border-bkg-100 rounded-lg overflow-y-auto"
     @scroll="handleScroll"
   >
     <p
@@ -93,6 +94,18 @@ watch(height, () => {
                 >{{ todo.subtasks.length }}
                 {{ todo.subtasks.length === 1 ? "task" : "tasks" }}</span
               >
+            </div>
+
+            <!-- Subtasks  -->
+            <div
+              v-if="'dueDate' in todo && todo.dueDate !== null"
+              class="flex items-center pr-1"
+              :class="{
+                'pr-1': 'description' in todo && todo.description !== '',
+              }"
+            >
+              <Calendar class="w-5 h-4" />
+              <span class="text-sm">{{ getRelativeDate(todo.dueDate) }} </span>
             </div>
 
             <!-- Description -->

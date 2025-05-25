@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { DropdownOption } from "@/types";
 
-const { options = [] } = defineProps<{
+const { options = [], date = null } = defineProps<{
   id: string;
   options?: DropdownOption[];
+  date?: Date | null;
 }>();
+
+defineEmits<{ (e: "setDate", value: Date): void }>();
 
 const target = useTemplateRef<HTMLElement>("target");
 const appStore = useAppStore();
@@ -22,6 +25,7 @@ onClickOutside(target, () => (appStore.menus.currentMenu = ""));
       v-if="appStore.menus.currentMenu === id"
       class="absolute top-full right-0 translate-y-1 flex flex-col bg-primary divide-y divide-secondary rounded-lg rounded-tr-none shadow-2xl z-10"
     >
+      <!-- Priority Selectoro -->
       <div v-if="id === 'priority'" class="flex gap-x-0.5 p-1">
         <button
           :class="[
@@ -64,6 +68,7 @@ onClickOutside(target, () => (appStore.menus.currentMenu = ""));
         </button>
       </div>
 
+      <!-- Custom Options -->
       <button
         v-for="(option, index) in options"
         :key="`${id}-${index}`"
@@ -71,6 +76,13 @@ onClickOutside(target, () => (appStore.menus.currentMenu = ""));
       >
         {{ option.label }}
       </button>
+
+      <!-- Calendar -->
+      <XCalander
+        v-if="id === 'calendar'"
+        :todo-date="date"
+        @set-date="(date) => $emit('setDate', date)"
+      />
     </div>
   </div>
 </template>

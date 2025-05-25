@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Alert: typeof import('./components/Alert.vue')['default']
+    Calendar: typeof import('./components/icons/Calendar.vue')['default']
     Check: typeof import('./components/icons/Check.vue')['default']
     Checkbox: typeof import('./components/todo/Checkbox.vue')['default']
     Chevron: typeof import('./components/icons/Chevron.vue')['default']
@@ -39,6 +40,7 @@ declare module 'vue' {
     TodoInput: typeof import('./components/todo/TodoInput.vue')['default']
     TodoList: typeof import('./components/todo/TodoList.vue')['default']
     Trash: typeof import('./components/icons/Trash.vue')['default']
+    XCalander: typeof import('./components/common/XCalander.vue')['default']
     XTooltip: typeof import('./components/common/XTooltip.vue')['default']
   }
 }

@@ -9,6 +9,7 @@ export interface BaseTodo {
 export interface Todo extends BaseTodo {
   description: string;
   priority: PRIORITY;
+  dueDate: Date | null;
   subtasks: BaseTodo[];
 }
 

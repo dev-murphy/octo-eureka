@@ -42,7 +42,7 @@ export const useAppStore = defineStore("app", {
   }),
   actions: {
     // Main Task
-    addTodo(title: string) {
+    addTodo(title: string, dueDate: Date | null) {
       this.todos.push({
         id: this.todos.length + 1,
         title,
@@ -50,6 +50,7 @@ export const useAppStore = defineStore("app", {
         description: "",
         subtasks: [],
         priority: this.menus.priority.current,
+        dueDate
       });
 
       this.menus.priority.current = "";
@@ -77,7 +78,7 @@ export const useAppStore = defineStore("app", {
       this.todos[this.todoIndex].subtasks.splice(index, 1);
     },
     // Menu
-    toggleMenu(menu: "filter" | "sort" | "priority") {
+    toggleMenu(menu: "filter" | "sort" | "priority" | "calendar") {
       if (this.menus.currentMenu === menu) {
         this.menus.currentMenu = "";
         return;
