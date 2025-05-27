@@ -3,7 +3,7 @@ import { isSelectedDateToday } from "@/utils";
 import dayjs from "dayjs";
 
 const props = defineProps<{ todoDate: Date | null }>();
-const emit = defineEmits<{ (e: "setDate", date: Date): void }>();
+const emit = defineEmits<{ (e: "setDate", date: Date | null): void }>();
 
 const now = new Date();
 const viewDate = ref(new Date());
@@ -85,7 +85,10 @@ watch(
 </script>
 
 <template>
-  <div class="w-[220px] p-2 rounded-lg text-txt-500" @click.stop>
+  <div
+    class="w-[220px] bg-primary border border-bkg-500 p-2 rounded-lg text-txt-500"
+    @click.stop
+  >
     <div class="flex items-center justify-between mb-2">
       <p>{{ monthLabel }}</p>
 
@@ -102,13 +105,14 @@ watch(
             () => {
               viewDate = new Date();
               selectedDate = new Date();
+              $emit('setDate', selectedDate);
             }
           "
           class="w-2 h-2 border transition rounded-full cursor-pointer"
           :class="[
-            selectedDate && !isSelectedDateToday(selectedDate)
-              ? 'border-txt-100 hover:border-txt-500'
-              : 'bg-txt-100 border-txt-100',
+            selectedDate && isToday(selectedDate?.getDate())
+              ? 'bg-txt-100 border-txt-100'
+              : 'border-txt-100 hover:border-txt-500',
           ]"
         ></button>
 
@@ -180,5 +184,17 @@ watch(
         {{ day }}
       </div>
     </div>
+
+    <button
+      class="w-full bg-accent/80 hover:bg-accent text-primary mt-2 py-1 font-medium rounded-md cursor-pointer"
+      @click="
+        () => {
+          $emit('setDate', null);
+          // viewDate = new Date();
+        }
+      "
+    >
+      Clear Date
+    </button>
   </div>
 </template>

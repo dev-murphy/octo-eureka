@@ -2,16 +2,16 @@
 const appStore = useAppStore();
 
 const mode = useColorMode();
-const isLightMode = ref(false);
+const isDarkMode = ref(true);
 const id = ref<number | undefined>();
 
-watch(isLightMode, () => {
+watch(isDarkMode, () => {
   id.value = setTimeout(() => {
     if (id.value !== undefined) {
       clearTimeout(id.value);
     }
 
-    mode.value = isLightMode.value ? "dark" : "light";
+    mode.value = isDarkMode.value ? "dark" : "light";
   }, 300);
 });
 </script>
@@ -24,7 +24,7 @@ watch(isLightMode, () => {
       Welcome to {{ appStore.name }}
     </h1>
 
-    <ThemeToggle v-model="isLightMode"  />
+    <ThemeToggle v-model="isDarkMode" />
 
     <div class="w-full max-w-[650px] flex flex-col gap-4 mt-4 mx-auto">
       <TodoInput />

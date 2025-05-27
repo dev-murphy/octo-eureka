@@ -9,6 +9,13 @@ const appStore = useAppStore();
 const title = ref("");
 const showCalendar = ref(false);
 
+const calendarBtn = useTemplateRef<HTMLElement>("calendar-btn");
+const calenderContainer = useTemplateRef<HTMLElement>("calendar-container");
+const { width } = useElementSize(calenderContainer);
+onClickOutside(calenderContainer, () => {
+  showCalendar.value = false;
+});
+
 const todoExists = computed(() => {
   let found;
   if (!isSubTask) {
@@ -33,6 +40,18 @@ const addItem = () => {
   title.value = "";
   d.value = null;
 };
+
+const resetDate = () => {
+  d.value = null;
+  showCalendar.value = false;
+};
+
+const dynamicPadding = computed(() => {
+  const paddingRight = width.value + 12;
+  return {
+    paddingRight: `${paddingRight}px`,
+  };
+});
 </script>
 
 <template>
@@ -45,30 +64,43 @@ const addItem = () => {
             placeholder="Enter todo here"
             v-model="title"
             class="w-full bg-primary border border-secondary rounded-md p-2 text-txt-500 placeholder:text-txt-100 outline-none"
-            @keydown.enter="addItem"
+            :style="dynamicPadding"
+            @keydown.enter="!todoExists && title.trim() !== '' && addItem()"
           />
 
           <div
+            ref="calendar-container"
             v-if="!isSubTask"
-            class="absolute top-1/2 right-4 -translate-y-1/2 z-10"
+            class="absolute top-1/2 right-1.5 -translate-y-1/2 z-10"
           >
-            <button
-              @click="
-                () => {
-                  showCalendar = !showCalendar;
-                }
-              "
-              class="flex items-center justify-center gap-x-1 text-sm text-txt-100"
+            <div
+              class="flex items-center gap-x-1 hover:bg-bkg-100 p-1 text-txt-100 rounded-md"
             >
-              <Calendar class="w-5 h-5" />
-              <span v-if="d">
-                {{ getRelativeDate(d) }}
-              </span>
-            </button>
+              <button
+                @click="
+                  () => {
+                    showCalendar = !showCalendar;
+                  }
+                "
+                class="flex items-center justify-center gap-x-1 text-sm cursor-pointer"
+              >
+                <Calendar class="w-5 h-5" />
+                <span v-if="d">
+                  {{ getRelativeDate(d) }}
+                </span>
+              </button>
+              <button
+                v-if="d !== null"
+                class="hover:text-priority-high cursor-pointer"
+                @click="resetDate"
+              >
+                <Close class="w-4 h-4" />
+              </button>
+            </div>
 
             <XCalander
               v-if="showCalendar"
-              class="absolute bg-bkg-500 top-full translate-y-1 right-0 z-20"
+              class="absolute top-full translate-y-1.5 right-0  z-20"
               :todo-date="d"
               @set-date="
                 (date) => {

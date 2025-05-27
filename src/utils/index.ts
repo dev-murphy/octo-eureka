@@ -23,7 +23,8 @@ export function getRelativeDate(selectedDate: Date) {
   return target.format("MM/DD/YYYY");
 }
 
-export function isSelectedDateToday(selectedDate: Date) {
+export function isSelectedDateToday(selectedDate: Date | null) {
+  if (selectedDate === null) return false;
   const today = dayjs().startOf("day");
   const target = dayjs(selectedDate).startOf("day");
   const diffDays = target.diff(today, "day");
