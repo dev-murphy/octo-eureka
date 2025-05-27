@@ -48,6 +48,7 @@ jobs:
         run: pnpm build
 
       - name: Create release
-        run: pnpx semantic-release
+        run: pnpm semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_ENV: production
