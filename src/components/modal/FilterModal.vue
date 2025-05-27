@@ -8,7 +8,7 @@ onClickOutside(filterContainer, () => {
 </script>
 
 <template>
-  <div ref="filter-container" class="relative">
+  <div ref="filter-container" class="relative w-full">
     <slot name="filter-btn" />
 
     <div
