@@ -1,0 +1,38 @@
+module.exports = {
+  branches: ["main"],
+  plugins: [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        preset: "conventionalcommits",
+      },
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        preset: "conventionalcommits",
+      },
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        npmPublish: false,
+      },
+    ],
+    [
+      "@semantic-release/git",
+      {
+        assets: ["package.json", "package-lock.json", "pnpm-lock.yaml"],
+        message:
+          "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
+      },
+    ],
+    [
+      "@semantic-release/github",
+      {
+        successComment: false,
+        failTitle: false,
+      },
+    ],
+  ],
+};
