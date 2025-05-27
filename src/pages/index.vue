@@ -23,7 +23,7 @@ watch(isDarkMode, () => {
     <ThemeToggle v-model="isDarkMode" />
 
     <h1
-      class="flex gap-x-2 text-center text-3xl md:text-5xl text-txt-100 font-bold"
+      class="flex gap-x-2 text-center text-3xl md:text-5xl text-accent font-bold"
     >
       <img
         v-if="mode === 'light'"
