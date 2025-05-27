@@ -44,6 +44,13 @@ module.exports = {
       },
     ],
     [
+      "@semantic-release/changelog",
+      {
+        changelogFile: "CHANGELOG.md",
+        changelogTitle: "# Changelog",
+      },
+    ],
+    [
       "@semantic-release/npm",
       {
         npmPublish: false,
@@ -52,7 +59,12 @@ module.exports = {
     [
       "@semantic-release/git",
       {
-        assets: ["package.json", "package-lock.json", "pnpm-lock.yaml"],
+        assets: [
+          "package.json",
+          "package-lock.json",
+          "pnpm-lock.yaml",
+          "CHANGELOG.md",
+        ],
         message:
           "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
       },
