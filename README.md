@@ -11,10 +11,10 @@ TDB
 - [x] Add sidebar for editing items
 - [x] Add subtask functionality
 - [x] Add light/dark mode
+- [x] Add due date functions
 
 ## What Am I Working?
 
-- [ ] Add due date functions
-- [ ] Add cypress test for application
+- [ ] Add playwright test for application
 - [ ] Add setting feature
 - [ ] Add vuefire and firebase to add for push notification
