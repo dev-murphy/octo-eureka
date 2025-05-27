@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1](https://github.com/dev-murphy/octo-eureka/compare/v1.1.0...v1.1.1) (2025-05-27)
+
+### 🧹 Miscellaneous
+
+* add pinia state to localstorage ([a3ae080](https://github.com/dev-murphy/octo-eureka/commit/a3ae080a506447e7768ad27d80e0c60f62e5f9d7))
+
 ## [1.1.0](https://github.com/dev-murphy/octo-eureka/compare/v1.0.0...v1.1.0) (2025-05-27)
 
 ### ✨ Features
