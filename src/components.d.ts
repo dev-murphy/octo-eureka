@@ -8,13 +8,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    Alert: typeof import('./components/Alert.vue')['default']
     Calendar: typeof import('./components/icons/Calendar.vue')['default']
     Check: typeof import('./components/icons/Check.vue')['default']
     Checkbox: typeof import('./components/todo/Checkbox.vue')['default']
     Chevron: typeof import('./components/icons/Chevron.vue')['default']
     Close: typeof import('./components/icons/Close.vue')['default']
-    Copy: typeof import('./components/Copy.vue')['default']
     Edit: typeof import('./components/icons/Edit.vue')['default']
     EditModal: typeof import('./components/todo/EditModal.vue')['default']
     Filter: typeof import('./components/icons/Filter.vue')['default']
@@ -22,9 +20,7 @@ declare module 'vue' {
     Flag: typeof import('./components/icons/Flag.vue')['default']
     FlagCross: typeof import('./components/icons/FlagCross.vue')['default']
     FlagFilled: typeof import('./components/icons/FlagFilled.vue')['default']
-    Github: typeof import('./components/Github.vue')['default']
     Grid: typeof import('./components/icons/Grid.vue')['default']
-    Input: typeof import('./components/todo/Input.vue')['default']
     List: typeof import('./components/icons/List.vue')['default']
     Modal: typeof import('./components/common/modal.vue')['default']
     Moon: typeof import('./components/icons/Moon.vue')['default']
@@ -41,6 +37,5 @@ declare module 'vue' {
     TodoList: typeof import('./components/todo/TodoList.vue')['default']
     Trash: typeof import('./components/icons/Trash.vue')['default']
     XCalander: typeof import('./components/common/XCalander.vue')['default']
-    XTooltip: typeof import('./components/common/XTooltip.vue')['default']
   }
 }

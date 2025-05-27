@@ -9,9 +9,9 @@ const appStore = useAppStore();
 const title = ref("");
 const showCalendar = ref(false);
 
-const calendarBtn = useTemplateRef<HTMLElement>("calendar-btn");
 const calenderContainer = useTemplateRef<HTMLElement>("calendar-container");
 const { width } = useElementSize(calenderContainer);
+
 onClickOutside(calenderContainer, () => {
   showCalendar.value = false;
 });
@@ -100,7 +100,7 @@ const dynamicPadding = computed(() => {
 
             <XCalander
               v-if="showCalendar"
-              class="absolute top-full translate-y-1.5 right-0  z-20"
+              class="absolute top-full translate-y-1.5 right-0 z-20"
               :todo-date="d"
               @set-date="
                 (date) => {

@@ -81,7 +81,7 @@ onClickOutside(target, () => (appStore.menus.currentMenu = ""));
       <XCalander
         v-if="id === 'calendar'"
         :todo-date="date"
-        @set-date="(date) => $emit('setDate', date)"
+        @set-date="(date) => date && $emit('setDate', date)"
       />
     </div>
   </div>

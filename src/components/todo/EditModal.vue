@@ -3,11 +3,9 @@ const appStore = useAppStore();
 
 const { textarea, input } = useTextareaAutosize();
 const target = useTemplateRef<HTMLElement>("target");
-const { y, arrivedState } = useScroll(target, {
+const { arrivedState } = useScroll(target, {
   offset: { top: 10 },
 });
-
-const isScrolled = ref(false);
 
 const todoCopy = ref(
   JSON.parse(JSON.stringify(toRaw(appStore.todos[appStore.todoIndex])))
