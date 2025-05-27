@@ -106,4 +106,5 @@ export const useAppStore = defineStore("app", {
       this.menus.priority.current = priority;
     },
   },
+  persist: true,
 });
