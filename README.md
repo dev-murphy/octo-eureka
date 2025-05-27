@@ -12,6 +12,8 @@ TDB
 - [x] Add subtask functionality
 - [x] Add light/dark mode
 - [x] Add due date functions
+- [x] Add basic filter functionality
+  - ALL, COMPLETED & ON-GOING TODOS
 
 ## What Am I Working?
 

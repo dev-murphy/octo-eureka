@@ -14,14 +14,19 @@ export const useAppStore = defineStore("app", {
       filter: {
         options: [
           {
+            label: "All",
+            value: "",
+          },
+          {
             label: "Completed",
             value: "completed",
           },
           {
-            label: "To Do",
+            label: "Ongoing",
             value: "todo",
           },
         ],
+        selected: "",
       },
       sort: {
         options: [
@@ -40,6 +45,16 @@ export const useAppStore = defineStore("app", {
       },
     },
   }),
+  getters: {
+    filteredTodos(state) {
+      if (state.menus.filter.selected === "") return state.todos;
+
+      if (state.menus.filter.selected === "completed")
+        return state.todos.filter((todo) => todo.completed);
+
+      return state.todos.filter((todo) => !todo.completed);
+    },
+  },
   actions: {
     // Main Task
     addTodo(title: string, dueDate: Date | null) {
@@ -50,7 +65,7 @@ export const useAppStore = defineStore("app", {
         description: "",
         subtasks: [],
         priority: this.menus.priority.current,
-        dueDate
+        dueDate,
       });
 
       this.menus.priority.current = "";

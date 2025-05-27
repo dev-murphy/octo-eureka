@@ -62,7 +62,7 @@ onMounted(() => {
 
         <div class="flex items-center gap-x-4">
           <!-- Completed Checkbox -->
-          <Checkbox
+          <XCheckbox
             id="edit-todo-is-complete"
             v-model:model-value="todoCopy.completed"
             :priority="todoCopy.priority"

@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import type { DropdownOption } from "@/types";
 
-const { options = [], date = null } = defineProps<{
+const { options = [] } = defineProps<{
   id: string;
   options?: DropdownOption[];
-  date?: Date | null;
 }>();
-
-defineEmits<{ (e: "setDate", value: Date): void }>();
 
 const target = useTemplateRef<HTMLElement>("target");
 const appStore = useAppStore();
@@ -69,20 +66,13 @@ onClickOutside(target, () => (appStore.menus.currentMenu = ""));
       </div>
 
       <!-- Custom Options -->
-      <button
+      <div
         v-for="(option, index) in options"
         :key="`${id}-${index}`"
         class="w-max py-1 px-3 text-sm text-txt-500"
       >
         {{ option.label }}
-      </button>
-
-      <!-- Calendar -->
-      <XCalander
-        v-if="id === 'calendar'"
-        :todo-date="date"
-        @set-date="(date) => date && $emit('setDate', date)"
-      />
+      </div>
     </div>
   </div>
 </template>

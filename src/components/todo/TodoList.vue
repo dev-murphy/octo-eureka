@@ -30,8 +30,14 @@ const editTodo = (index: number) => {
       v-if="todos.length === 0"
       class="w-4/5 pt-3 text-lg text-txt-100 text-center mx-auto"
     >
-      There is no todo items currently. You can add todo by typing the title and
-      click the add button.
+      <span v-if="appStore.menus.filter.selected === 'completed'">
+        There is no completed todo item currently. You can complete one of the
+        existing todos or create a new one and complete it.
+      </span>
+      <span v-else>
+        There is no items to do currently. You can add todo by typing the title
+        and click the add button.
+      </span>
     </p>
 
     <!-- Todo List -->
@@ -42,16 +48,16 @@ const editTodo = (index: number) => {
         class="w-full hover:bg-primary text-txt-500 flex items-center p-3 overflow-hidden"
         @click="editTodo(index)"
       >
-        <Checkbox
+        <XCheckbox
           :id="`todo-${index}-is-complete`"
           v-model="todo.completed"
           :priority="'priority' in todo ? todo.priority : ''"
         />
 
         <!-- Title, description and subtask -->
-        <div class="pl-2 pr-5">
+        <div class="pl-2 pr-5 overflow-x-hidden">
           <p
-            class="truncate overflow-hidden"
+            class="truncate"
             :class="{
               'line-through text-txt-500/30': todo.completed,
               'text-txt-500': !todo.completed,
@@ -60,8 +66,8 @@ const editTodo = (index: number) => {
             {{ todo.title }}
           </p>
 
-          <div class="flex flex-col sm:flex-row text-txt-100">
-            <div class="inline-flex">
+          <div class="flex flex-col sm:flex-row gap-0.5 text-txt-100">
+            <div class="inline-flex gap-x-0.5">
               <!-- Due Date  -->
               <div
                 v-if="'dueDate' in todo && todo.dueDate !== null"
@@ -70,7 +76,7 @@ const editTodo = (index: number) => {
                   'pr-1': 'description' in todo && todo.description !== '',
                 }"
               >
-                <Calendar class="w-5 h-4" />
+                <Calendar class="w-4 h-4" />
                 <span class="text-sm"
                   >{{ getRelativeDate(todo.dueDate) }}
                 </span>
@@ -84,7 +90,7 @@ const editTodo = (index: number) => {
                   'pr-1': 'description' in todo && todo.description !== '',
                 }"
               >
-                <Subtask class="w-5 h-4" />
+                <Subtask class="w-4 h-4" />
                 <span class="text-sm"
                   >{{ todo.subtasks.length }}
                   {{ todo.subtasks.length === 1 ? "task" : "tasks" }}</span
@@ -96,11 +102,8 @@ const editTodo = (index: number) => {
             <div
               v-if="'description' in todo && todo.description"
               class="flex items-center gap-x-1"
-              :class="{
-                'pl-1': 'subtasks' in todo && todo.subtasks.length !== 0,
-              }"
             >
-              <Notes class="w-5 h-5" />
+              <Notes class="w-4 h-4" />
               <span
                 class="w-full max-w-[30ch] text-sm truncate overflow-hidden"
                 >{{ todo.description }}</span
