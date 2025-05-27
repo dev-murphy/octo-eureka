@@ -22,8 +22,23 @@ watch(isDarkMode, () => {
   >
     <ThemeToggle v-model="isDarkMode" />
 
-    <h1 class="text-center text-3xl md:text-5xl text-txt-100 font-bold">
-      Welcome to {{ appStore.name }}
+    <h1
+      class="flex gap-x-2 text-center text-3xl md:text-5xl text-txt-100 font-bold"
+    >
+      <img
+        v-if="mode === 'light'"
+        src="@/assets/images/logo.webp"
+        alt="logo"
+        class="w-10 h-10"
+      />
+
+      <img
+        v-if="mode === 'dark'"
+        src="@/assets/images/logo-dark.webp"
+        alt="logo"
+        class="w-10 h-10"
+      />
+      {{ appStore.name }}
     </h1>
 
     <div class="w-full max-w-[650px] flex flex-col gap-4 mt-4 mx-auto">
