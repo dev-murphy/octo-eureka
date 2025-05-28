@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.1](https://github.com/dev-murphy/octo-eureka/compare/v1.3.0...v1.3.1) (2025-05-28)
+
+### ⚙️ CI/CD
+
+* add playwright test to pipeline, add production url to e2e test ([829f108](https://github.com/dev-murphy/octo-eureka/commit/829f108d6120c23810b6b18a54e949b3da4a2c20))
+
 ## [1.3.0](https://github.com/dev-murphy/octo-eureka/compare/v1.2.0...v1.3.0) (2025-05-28)
 
 ### ✨ Features
