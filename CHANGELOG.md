@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.2.0](https://github.com/dev-murphy/octo-eureka/compare/v1.1.2...v1.2.0) (2025-05-28)
+
+### ✨ Features
+
+* add unit test to app ([64c6875](https://github.com/dev-murphy/octo-eureka/commit/64c687510c64775c76b2d5c318ee47f11fe8ccdb))
+
+### 🐛 Bug Fixes
+
+* add correct type for node timeout ([8a4b8f3](https://github.com/dev-murphy/octo-eureka/commit/8a4b8f3bfcb2e1e239d7e1de03b913f5ba13b5fd))
+
+### 🧹 Miscellaneous
+
+* **release:** 1.1.3 [skip ci] ([1d69e27](https://github.com/dev-murphy/octo-eureka/commit/1d69e27b0d52166bbe1bca30febc2cda8c6501ad))
+
+### 💅 UI Updates
+
+* update spacing for todo list item, change logo size on home page ([9dfca7b](https://github.com/dev-murphy/octo-eureka/commit/9dfca7b90fe18b231a4ea6f6fac18e94acdba38b))
+
 ## [1.1.3](https://github.com/dev-murphy/octo-eureka/compare/v1.1.2...v1.1.3) (2025-05-28)
 
 ### 💅 UI Updates
