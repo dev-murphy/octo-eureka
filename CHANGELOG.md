@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.2](https://github.com/dev-murphy/octo-eureka/compare/v1.1.1...v1.1.2) (2025-05-28)
+
+### 🧹 Miscellaneous
+
+* update changelog with all previous changes ([788e93e](https://github.com/dev-murphy/octo-eureka/commit/788e93ef8a4619545cd44ae91eb15e66e9394a95))
+
+### 📖 Documentation
+
+* list more completed feature in README ([f4e20d6](https://github.com/dev-murphy/octo-eureka/commit/f4e20d6e13a212da4d7654401c1b746c2f460788))
+
+### ⚙️ CI/CD
+
+* update pnpm install command ([04687a9](https://github.com/dev-murphy/octo-eureka/commit/04687a9191ee568839c3cb0d9c8cd7b65365210c))
+* update pnpm version to 8.15.4 ([ccbc336](https://github.com/dev-murphy/octo-eureka/commit/ccbc33616c8c4527e8b3eb9ec8405da07eab1343))
+
 ## [1.1.1](https://github.com/dev-murphy/octo-eureka/compare/v1.1.0...v1.1.1) (2025-05-27)
 
 ### 🧹 Miscellaneous
