@@ -1,9 +1,5 @@
 import dayjs from "dayjs";
 
-export function formatDate(date: Date) {
-  return dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS");
-}
-
 export function getRelativeDate(selectedDate: Date) {
   const today = dayjs().startOf("day");
   const target = dayjs(selectedDate).startOf("day");
