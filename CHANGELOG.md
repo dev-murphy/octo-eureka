@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.3](https://github.com/dev-murphy/octo-eureka/compare/v1.1.2...v1.1.3) (2025-05-28)
+
+### 💅 UI Updates
+
+* update spacing for todo list item, change logo size on home page ([9dfca7b](https://github.com/dev-murphy/octo-eureka/commit/9dfca7b90fe18b231a4ea6f6fac18e94acdba38b))
+
 ## [1.1.2](https://github.com/dev-murphy/octo-eureka/compare/v1.1.1...v1.1.2) (2025-05-28)
 
 ### 🧹 Miscellaneous
