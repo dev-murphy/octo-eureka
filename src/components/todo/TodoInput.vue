@@ -65,6 +65,7 @@ const dynamicPadding = computed(() => {
             v-model="title"
             class="w-full bg-primary border border-secondary rounded-md p-2 text-txt-500 placeholder:text-txt-100 outline-none"
             :style="dynamicPadding"
+            data-test="todo-title-input"
             @keydown.enter="!todoExists && title.trim() !== '' && addItem()"
           />
 
@@ -83,6 +84,7 @@ const dynamicPadding = computed(() => {
                   }
                 "
                 class="flex items-center justify-center gap-x-1 text-sm cursor-pointer"
+                data-test="calendar-dropdown"
               >
                 <Calendar class="w-5 h-5" />
                 <span v-if="todoDate">
@@ -93,6 +95,7 @@ const dynamicPadding = computed(() => {
                 v-if="todoDate !== null"
                 class="hover:text-priority-high cursor-pointer"
                 @click="resetDate"
+                data-test="clear-todo-date"
               >
                 <Close class="w-4 h-4" />
               </button>
@@ -118,8 +121,9 @@ const dynamicPadding = computed(() => {
               ? 'cursor-not-allowed'
               : 'hover:bg-secondary cursor-pointer',
           ]"
-          @click="addItem"
           :disabled="todoExists || title.trim() === ''"
+          data-test="add-todo-btn"
+          @click="addItem"
         >
           <Plus class="w-6 h-6" />
         </button>
@@ -127,7 +131,11 @@ const dynamicPadding = computed(() => {
 
       <FilterOptions v-if="!isSubTask" />
     </div>
-    <p v-if="todoExists" class="pt-1 text-sm text-priority-high tracking-wide">
+    <p
+      v-if="todoExists"
+      class="pt-1 text-sm text-priority-high tracking-wide"
+      data-test="todo-input-error"
+    >
       A todo with this title already exist. Please type another title.
     </p>
   </div>

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getRelativeDate, isSelectedDateToday } from "@/utils";
+import { getRelativeDate, isSelectedDateToday } from "../../utils";
 import dayjs from "dayjs";
 
 describe("Utility Functions", () => {

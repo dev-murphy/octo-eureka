@@ -29,6 +29,7 @@ const editTodo = (index: number) => {
     <p
       v-if="todos.length === 0"
       class="w-4/5 pt-3 text-lg text-txt-100 text-center mx-auto"
+      data-test="no-todo-message"
     >
       <span v-if="appStore.menus.filter.selected === 'completed'">
         There is no completed todo item currently. You can complete one of the
@@ -47,6 +48,7 @@ const editTodo = (index: number) => {
         :key="`todo-item-${index}`"
         class="w-full hover:bg-primary text-txt-500 flex items-center p-3 overflow-hidden"
         @click="editTodo(index)"
+        :data-test="`todo-item-${index}`"
       >
         <XCheckbox
           :id="`todo-${index}-is-complete`"
