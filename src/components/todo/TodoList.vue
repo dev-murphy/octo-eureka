@@ -71,7 +71,13 @@ const editTodo = (index: number) => {
           <div
             class="flex flex-col sm:flex-row gap-x-1.5 gap-y-0.5 text-txt-100"
           >
-            <div class="flex items-center gap-x-1.5">
+            <div
+              class="flex items-center gap-x-1.5"
+              v-if="
+                ('dueDate' in todo && todo.dueDate !== null) ||
+                ('subtasks' in todo && todo.subtasks.length !== 0)
+              "
+            >
               <!-- Due Date  -->
               <div
                 v-if="'dueDate' in todo && todo.dueDate !== null"

@@ -6,8 +6,14 @@ const { isSubTask = false } = defineProps<{
 }>();
 
 const appStore = useAppStore();
+
 const title = ref("");
+const description = ref("");
+const showDescription = ref(false);
 const showCalendar = ref(false);
+
+const todoInput = useTemplateRef<HTMLElement>("todoTitle");
+const descriptionInput = useTemplateRef<HTMLElement>("todoDescription");
 
 const calenderContainer = useTemplateRef<HTMLElement>("calendar-container");
 const { width } = useElementSize(calenderContainer);
@@ -31,19 +37,45 @@ const todoExists = computed(() => {
   return found !== undefined;
 });
 
-const todoDate = ref<Date | null>(null);
-
 const addItem = () => {
   if (isSubTask) appStore.addSubtask(title.value);
-  else appStore.addTodo(title.value, todoDate.value);
+  else appStore.addTodo(title.value, todoDate.value, description.value);
 
   title.value = "";
+  description.value = "";
+  showDescription.value = false;
   todoDate.value = null;
 };
 
+const todoDate = ref<Date | null>(null);
 const resetDate = () => {
   todoDate.value = null;
   showCalendar.value = false;
+};
+
+const handleKeyDown = (event: KeyboardEvent) => {
+  if (event.key === "Enter" && event.shiftKey) {
+    showDescription.value = true;
+    descriptionInput.value?.focus();
+    return;
+  }
+
+  if (event.key === "Enter" && !todoExists.value && title.value.trim() !== "") {
+    addItem();
+  }
+};
+
+const handleDescriptionKeyDown = (event: KeyboardEvent) => {
+  if (event.key === "Backspace" && description.value === "") {
+    showDescription.value = false;
+    todoInput.value?.focus();
+    event.preventDefault();
+    return;
+  }
+
+  if (event.key === "Enter" && !todoExists.value && title.value.trim() !== "") {
+    addItem();
+  }
 };
 
 const dynamicPadding = computed(() => {
@@ -52,66 +84,93 @@ const dynamicPadding = computed(() => {
     paddingRight: `${paddingRight}px`,
   };
 });
+
+watch(descriptionInput, (newValue) => {
+  if (newValue) {
+    newValue.focus();
+  }
+});
 </script>
 
 <template>
   <div>
     <div class="flex flex-col md:flex-row gap-2">
       <div class="flex-grow flex gap-x-2">
-        <div class="relative w-full">
-          <input
-            type="text"
-            placeholder="Enter todo here"
-            v-model="title"
-            class="w-full bg-primary border border-secondary rounded-md p-2 text-txt-500 placeholder:text-txt-100 outline-none"
-            :style="dynamicPadding"
-            data-test="todo-title-input"
-            @keydown.enter="!todoExists && title.trim() !== '' && addItem()"
-          />
+        <div
+          class="w-full bg-primary border border-secondary divide-y divide-secondary rounded-md"
+        >
+          <!-- Todo title input -->
+          <div class="relative">
+            <input
+              ref="todoTitle"
+              type="text"
+              placeholder="Enter todo here"
+              v-model="title"
+              class="w-full p-2 text-txt-500 placeholder:text-txt-100 outline-none"
+              :style="dynamicPadding"
+              data-test="todo-title-input"
+              @keydown="handleKeyDown"
+            />
 
-          <div
-            ref="calendar-container"
-            v-if="!isSubTask"
-            class="absolute top-1/2 right-1.5 -translate-y-1/2 z-10"
-          >
+            <!-- Calendar Dropdown -->
             <div
-              class="flex items-center gap-x-1 hover:bg-bkg-100 p-1 text-txt-100 rounded-md"
+              ref="calendar-container"
+              v-if="!isSubTask"
+              class="absolute top-1/2 right-1.5 -translate-y-1/2 z-10"
             >
-              <button
-                @click="
-                  () => {
-                    showCalendar = !showCalendar;
+              <div
+                class="flex items-center gap-x-1 hover:bg-bkg-100 p-1 text-txt-100 rounded-md"
+              >
+                <!-- Calendar Button -->
+                <button
+                  @click="
+                    () => {
+                      showCalendar = !showCalendar;
+                    }
+                  "
+                  class="flex items-center justify-center gap-x-1 text-sm cursor-pointer"
+                  data-test="calendar-dropdown"
+                >
+                  <Calendar class="w-5 h-5" />
+                  <span v-if="todoDate">
+                    {{ getRelativeDate(todoDate) }}
+                  </span>
+                </button>
+
+                <!-- Clear Date button -->
+                <button
+                  v-if="todoDate !== null"
+                  class="hover:text-priority-high cursor-pointer"
+                  @click="resetDate"
+                  data-test="clear-todo-date"
+                >
+                  <Close class="w-4 h-4" />
+                </button>
+              </div>
+
+              <XCalander
+                v-if="showCalendar"
+                class="absolute top-full translate-y-1.5 right-0 w-[220px] z-20"
+                :todo-date="todoDate"
+                @set-date="
+                  (date) => {
+                    todoDate = date;
                   }
                 "
-                class="flex items-center justify-center gap-x-1 text-sm cursor-pointer"
-                data-test="calendar-dropdown"
-              >
-                <Calendar class="w-5 h-5" />
-                <span v-if="todoDate">
-                  {{ getRelativeDate(todoDate) }}
-                </span>
-              </button>
-              <button
-                v-if="todoDate !== null"
-                class="hover:text-priority-high cursor-pointer"
-                @click="resetDate"
-                data-test="clear-todo-date"
-              >
-                <Close class="w-4 h-4" />
-              </button>
+              />
             </div>
-
-            <XCalander
-              v-if="showCalendar"
-              class="absolute top-full translate-y-1.5 right-0 z-20"
-              :todo-date="todoDate"
-              @set-date="
-                (date) => {
-                  todoDate = date;
-                }
-              "
-            />
           </div>
+
+          <!-- Todo descrption -->
+          <input
+            v-if="showDescription && !isSubTask"
+            ref="todoDescription"
+            type="text"
+            v-model="description"
+            class="w-full px-2 pb-1 text-txt-100 placeholder:text-secondary text-sm outline-none"
+            placeholder="Enter todo description"
+            @keydown="handleDescriptionKeyDown"
+          />
         </div>
 
         <button

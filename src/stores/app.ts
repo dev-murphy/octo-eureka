@@ -57,12 +57,12 @@ export const useAppStore = defineStore("app", {
   },
   actions: {
     // Main Task
-    addTodo(title: string, dueDate: Date | null) {
+    addTodo(title: string, dueDate: Date | null, description?: string) {
       this.todos.push({
         id: this.todos.length + 1,
         title,
         completed: false,
-        description: "",
+        description: description || "",
         subtasks: [],
         priority: this.menus.priority.current,
         dueDate,

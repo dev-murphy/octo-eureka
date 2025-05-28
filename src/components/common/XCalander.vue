@@ -86,7 +86,7 @@ watch(
 
 <template>
   <div
-    class="w-[220px] bg-primary border border-bkg-500 p-2 rounded-lg text-txt-500"
+    class="bg-primary border border-bkg-500 p-2 rounded-lg text-txt-500"
     @click.stop
   >
     <div class="flex items-center justify-between mb-2">
@@ -110,7 +110,7 @@ watch(
           "
           class="w-2 h-2 border transition rounded-full cursor-pointer"
           :class="[
-            selectedDate && isToday(selectedDate?.getDate())
+            selectedDate && isSelectedDateToday(selectedDate)
               ? 'bg-txt-100 border-txt-100'
               : 'border-txt-100 hover:border-txt-500',
           ]"

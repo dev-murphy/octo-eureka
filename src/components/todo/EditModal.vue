@@ -1,15 +1,35 @@
 <script lang="ts" setup>
+import type { Todo } from "@/types";
+import { getRelativeDate } from "@/utils";
+import { stringify, parse } from "zipson";
+
 const appStore = useAppStore();
 
 const { textarea, input } = useTextareaAutosize();
+
 const target = useTemplateRef<HTMLElement>("target");
+onClickOutside(target, () => {
+  closeModal();
+});
+
 const { arrivedState } = useScroll(target, {
   offset: { top: 10 },
 });
 
-const todoCopy = ref(
-  JSON.parse(JSON.stringify(toRaw(appStore.todos[appStore.todoIndex])))
+const showCalendar = ref(false);
+const calenderDropdown = useTemplateRef<HTMLElement>("calendarDropdown");
+onClickOutside(calenderDropdown, () => {
+  showCalendar.value = false;
+});
+
+const todoCopy = ref<Todo>(
+  parse(stringify(toRaw(appStore.todos[appStore.todoIndex])))
 );
+
+todoCopy.value.dueDate =
+  typeof todoCopy.value.dueDate === "string"
+    ? new Date(todoCopy.value.dueDate)
+    : todoCopy.value.dueDate;
 
 const updateTodo = () => {
   appStore.editTodo(appStore.todoIndex, {
@@ -20,10 +40,6 @@ const updateTodo = () => {
 
   closeModal();
 };
-
-onClickOutside(target, () => {
-  closeModal();
-});
 
 const closeModal = () => {
   appStore.todoIndex = -1;
@@ -44,6 +60,7 @@ onMounted(() => {
       ref="target"
       class="absolute right-0 inset-y-0 w-full sm:w-1/2 xl:w-1/3 bg-primary overflow-y-auto"
     >
+      <!-- Close Modal, Save and Complete Todo -->
       <div
         class="sticky top-0 flex justify-between px-1 py-3 transition-all"
         :class="{
@@ -82,7 +99,7 @@ onMounted(() => {
 
       <div class="p-3">
         <!-- Title & Priority -->
-        <div class="flex flex-col sm:flex-row gap-x-4 mb-2 sm:mb-0">
+        <div class="flex flex-col lg:flex-row gap-x-4 mb-2 sm:mb-0">
           <div class="flex-grow">
             <!-- Input for Editing Title -->
             <label
@@ -169,19 +186,75 @@ onMounted(() => {
           </div>
         </div>
 
-        <!-- Description -->
-        <label
-          for="edit-todo-description"
-          class="text-txt-100 font-medium tracking-wider"
-          >Description</label
-        >
-        <textarea
-          ref="textarea"
-          name="edit-todo-description"
-          v-model="input"
-          class="w-full bg-primary border border-secondary mt-1 p-2 pb-2.5 placeholder:text-txt-100 text-txt-500 outline-none resize-none overflow-y-hidden rounded-md"
-          placeholder="Enter task description"
-        />
+        <!-- Description & Due Date  -->
+        <div class="flex flex-col lg:flex-row gap-x-3 my-2">
+          <div class="flex-grow">
+            <!-- Description -->
+            <label
+              for="edit-todo-description"
+              class="text-txt-100 font-medium tracking-wider"
+              >Description</label
+            >
+            <textarea
+              ref="textarea"
+              name="edit-todo-description"
+              v-model="input"
+              class="w-full bg-primary border border-secondary mt-1 p-2 pb-2.5 placeholder:text-txt-100 text-txt-500 outline-none resize-none overflow-y-hidden rounded-md"
+              placeholder="Enter task description"
+            />
+          </div>
+
+          <div>
+            <!-- Calendar -->
+            <p class="mb-1 text-txt-100 font-medium tracking-wider">Due Date</p>
+
+            <div
+              ref="calendarDropdown"
+              class="relative w-full lg:w-[200px] bg-bkg-100 border border-bkg-100 inline-flex items-center gap-x-1 py-2 px-2 rounded-md"
+              :class="{
+                'text-txt-100': todoCopy.dueDate === null,
+                'text-txt-500': todoCopy.dueDate !== null,
+              }"
+              @click="
+                () => {
+                  showCalendar = !showCalendar;
+                }
+              "
+            >
+              <Calendar class="w-6 h-6 text-accent" />
+              <p class="leading-3">
+                <span v-if="todoCopy.dueDate">
+                  {{ getRelativeDate(todoCopy.dueDate) }}
+                </span>
+
+                <span v-else> Select Date </span>
+              </p>
+              <button
+                v-if="todoCopy.dueDate"
+                class="hover:text-priority-high ml-auto rounded-md cursor-pointer"
+                @click.stop="
+                  () => {
+                    todoCopy.dueDate = null;
+                  }
+                "
+              >
+                <Close class="w-6 h-6" />
+              </button>
+
+              <!-- Calendar component -->
+              <XCalander
+                v-if="showCalendar"
+                class="absolute top-full right-0 translate-y-1 w-[250px] mb-2 z-20"
+                :todo-date="todoCopy.dueDate"
+                @set-date="
+                  (date) => {
+                    todoCopy.dueDate = date;
+                  }
+                "
+              />
+            </div>
+          </div>
+        </div>
 
         <!-- Sub tasks -->
         <p class="mb-0.5 text-txt-100 font-medium tracking-wider">Sub-tasks</p>
