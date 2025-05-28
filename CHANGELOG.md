@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0](https://github.com/dev-murphy/octo-eureka/compare/v1.2.0...v1.3.0) (2025-05-28)
+
+### ✨ Features
+
+* add e2e with playwright, restructure tests folder ([a6aaa42](https://github.com/dev-murphy/octo-eureka/commit/a6aaa4260565bb3fa8d4589b85a57ab53991c992))
+
 ## [1.2.0](https://github.com/dev-murphy/octo-eureka/compare/v1.1.2...v1.2.0) (2025-05-28)
 
 ### ✨ Features
