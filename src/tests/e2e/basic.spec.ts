@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Basic Functions", () => {
   test("can add todo", async ({ page }) => {
-    await page.goto("http://");
+    await page.goto("http://octo-eureka.netlify.app/");
 
     await expect(page).toHaveTitle(/Octo Eureka/);
 
