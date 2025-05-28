@@ -14,6 +14,9 @@ TDB
 - [x] Add due date functions
 - [x] Add basic filter functionality
   - ALL, COMPLETED & ON-GOING TODOS
+- [x] Add pinia state to local storage
+- [x] Add auto-version using semantic-release
+  - generate release notes & change log
 
 ## What Am I Working?
 
