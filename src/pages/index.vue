@@ -3,7 +3,7 @@ const appStore = useAppStore();
 
 const mode = useColorMode();
 const isDarkMode = ref(mode.value === "dark");
-const id = ref<number | undefined>();
+const id = ref<NodeJS.Timeout | undefined>();
 
 watch(isDarkMode, () => {
   id.value = setTimeout(() => {
