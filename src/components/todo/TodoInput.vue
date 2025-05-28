@@ -31,18 +31,18 @@ const todoExists = computed(() => {
   return found !== undefined;
 });
 
-const d = ref<Date | null>(null);
+const todoDate = ref<Date | null>(null);
 
 const addItem = () => {
   if (isSubTask) appStore.addSubtask(title.value);
-  else appStore.addTodo(title.value, d.value);
+  else appStore.addTodo(title.value, todoDate.value);
 
   title.value = "";
-  d.value = null;
+  todoDate.value = null;
 };
 
 const resetDate = () => {
-  d.value = null;
+  todoDate.value = null;
   showCalendar.value = false;
 };
 
@@ -85,12 +85,12 @@ const dynamicPadding = computed(() => {
                 class="flex items-center justify-center gap-x-1 text-sm cursor-pointer"
               >
                 <Calendar class="w-5 h-5" />
-                <span v-if="d">
-                  {{ getRelativeDate(d) }}
+                <span v-if="todoDate">
+                  {{ getRelativeDate(todoDate) }}
                 </span>
               </button>
               <button
-                v-if="d !== null"
+                v-if="todoDate !== null"
                 class="hover:text-priority-high cursor-pointer"
                 @click="resetDate"
               >
@@ -101,10 +101,10 @@ const dynamicPadding = computed(() => {
             <XCalander
               v-if="showCalendar"
               class="absolute top-full translate-y-1.5 right-0 z-20"
-              :todo-date="d"
+              :todo-date="todoDate"
               @set-date="
                 (date) => {
-                  d = date;
+                  todoDate = date;
                 }
               "
             />
@@ -112,7 +112,7 @@ const dynamicPadding = computed(() => {
         </div>
 
         <button
-          class="bg-primary disabled:bg-bkg-100 p-2 text-txt-500 disabled:text-txt-100 rounded-md"
+          class="bg-primary sm:disabled:bg-bkg-100 p-2 text-txt-500 sm:disabled:text-txt-100 rounded-md"
           :class="[
             todoExists || title.trim() === ''
               ? 'cursor-not-allowed'

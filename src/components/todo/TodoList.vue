@@ -66,15 +66,14 @@ const editTodo = (index: number) => {
             {{ todo.title }}
           </p>
 
-          <div class="flex flex-col sm:flex-row gap-0.5 text-txt-100">
-            <div class="inline-flex gap-x-0.5">
+          <div
+            class="flex flex-col sm:flex-row gap-x-1.5 gap-y-0.5 text-txt-100"
+          >
+            <div class="flex items-center gap-x-1.5">
               <!-- Due Date  -->
               <div
                 v-if="'dueDate' in todo && todo.dueDate !== null"
-                class="flex items-center pr-1"
-                :class="{
-                  'pr-1': 'description' in todo && todo.description !== '',
-                }"
+                class="flex items-center gap-x-0.5"
               >
                 <Calendar class="w-4 h-4" />
                 <span class="text-sm"
@@ -85,10 +84,7 @@ const editTodo = (index: number) => {
               <!-- Subtasks  -->
               <div
                 v-if="'subtasks' in todo && todo.subtasks.length > 0"
-                class="flex items-center pr-1"
-                :class="{
-                  'pr-1': 'description' in todo && todo.description !== '',
-                }"
+                class="flex items-center gap-x-0.5"
               >
                 <Subtask class="w-4 h-4" />
                 <span class="text-sm"
@@ -103,7 +99,7 @@ const editTodo = (index: number) => {
               v-if="'description' in todo && todo.description"
               class="flex items-center gap-x-1"
             >
-              <Notes class="w-4 h-4" />
+              <Notes class="w-5 h-5" />
               <span
                 class="w-full max-w-[30ch] text-sm truncate overflow-hidden"
                 >{{ todo.description }}</span
