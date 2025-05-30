@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.0](https://github.com/dev-murphy/octo-eureka/compare/v1.3.1...v1.4.0) (2025-05-30)
+
+### ✨ Features
+
+* add description to todo input, allow user to set due date in edit modal ([77ae7ee](https://github.com/dev-murphy/octo-eureka/commit/77ae7ee35cac7ab70b8ee6f861a83e2ac4a1d57b))
+
+### 📖 Documentation
+
+* add MIT license ([56502ef](https://github.com/dev-murphy/octo-eureka/commit/56502ef41a1c4569fd5d1564c19c24857e67da26))
+* add project description, getting started and tech stack ([57088ab](https://github.com/dev-murphy/octo-eureka/commit/57088aba86bb5c9a5c401c34daf1650cf6398e1c))
+
 ## [1.3.1](https://github.com/dev-murphy/octo-eureka/compare/v1.3.0...v1.3.1) (2025-05-28)
 
 ### ⚙️ CI/CD
