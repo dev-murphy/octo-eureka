@@ -27,7 +27,8 @@ onClickOutside(filterContainer, () => {
         :class="{
           'bg-primary text-accent pointer-events-none':
             option.value === appStore.menus.filter.selected,
-          'text-txt-100': option.value !== appStore.menus.filter.selected,
+          'text-txt-100 hover:text-txt-500 hover:bg-primary/50':
+            option.value !== appStore.menus.filter.selected,
         }"
       >
         <Check
