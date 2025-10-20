@@ -5,6 +5,10 @@ const mode = useColorMode();
 const isDarkMode = ref(mode.value === "dark");
 const id = ref<NodeJS.Timeout | undefined>();
 
+const completedTodos = computed(() => {
+  return appStore.todos.filter((todo) => todo.completed).length;
+});
+
 watch(isDarkMode, () => {
   id.value = setTimeout(() => {
     if (id.value !== undefined) {
@@ -41,9 +45,14 @@ watch(isDarkMode, () => {
       {{ appStore.name }}
     </h1>
 
-    <div class="w-full max-w-[650px] flex flex-col gap-4 mt-4 mx-auto">
+    <div class="w-full max-w-[650px] flex flex-col mt-4 mx-auto">
       <TodoInput />
-      <TodoList :todos="appStore.filteredTodos" />
+      <TodoList :todos="appStore.filteredTodos" class="mt-4" />
+      <p v-if="appStore.todos.length !== 0" class="mt-1 text-txt-100">
+        <span class="text-txt-500 font-bold">{{ completedTodos }}</span> /
+        {{ appStore.todos.length }}
+        {{ appStore.todos.length === 1 ? "todo completed" : "todos completed" }}
+      </p>
     </div>
 
     <EditModal v-if="appStore.mode.isEditMode" />
