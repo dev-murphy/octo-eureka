@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.4.1](https://github.com/dev-murphy/octo-eureka/compare/v1.4.0...v1.4.1) (2025-10-20)
+
+### 🧹 Miscellaneous
+
+* add info to see number of completed todos ([e313c19](https://github.com/dev-murphy/octo-eureka/commit/e313c197aab19394ad6a0bec3e60bd6ebb80916b))
+* add package manager to package.json, update pnpm-lock version ([c734f13](https://github.com/dev-murphy/octo-eureka/commit/c734f13b609b0a0459a74f7873a65f553028e950))
+* handle new vueuse imports ([aa1d835](https://github.com/dev-murphy/octo-eureka/commit/aa1d835c0f2f31c21e961ee19075fb32dd791a31))
+* increase node version ([193532c](https://github.com/dev-murphy/octo-eureka/commit/193532cc033acd5c07b3ee32b687ea24774962e6))
+* update hover styles for filter modal ([2deb431](https://github.com/dev-murphy/octo-eureka/commit/2deb4310bdf305d83573a28ba1394814fced1cd5))
+
+### 📖 Documentation
+
+* update README.md ([40c599d](https://github.com/dev-murphy/octo-eureka/commit/40c599d00cf457edc00b1d8d49c5227dee7f61e0))
+
+### ⚙️ CI/CD
+
+* remove pnpm version from release yaml ([56c4de1](https://github.com/dev-murphy/octo-eureka/commit/56c4de1e1ff54d1b6217ac9518d93f463cdb3af8))
+* update pnpm version in release yaml ([0ca45c4](https://github.com/dev-murphy/octo-eureka/commit/0ca45c4721854adbf1eae827c8e4659b65a9fd79))
+
 ## [1.4.0](https://github.com/dev-murphy/octo-eureka/compare/v1.3.1...v1.4.0) (2025-05-30)
 
 ### ✨ Features
