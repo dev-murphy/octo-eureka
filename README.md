@@ -103,6 +103,8 @@ Here are list of tech and tools I used to create this project:
 - [x] Start writing test for the app
   - 100% coverage for pinia store and utils funcs
   - playwright test for adding todo (CI was added for this!)
+- [x] Create a demo of the app
+- [x] Show number of todos compared to completed todos
 
 ## What Am I Working?
 
@@ -111,8 +113,7 @@ Here are list of tech and tools I used to create this project:
   - Custom Accent Color
   - clearing data
   - Visualization
-- [ ] Create a demo of the app
-- [ ] Add vuefire and firebase to add for push notification
+
 
 > 💡 **Note:**  
 >  Please check out the [CHANGELOG.md](/CHANGELOG.md) to see a full list of the features I have worked on, because the list above may not be exhaustive.
